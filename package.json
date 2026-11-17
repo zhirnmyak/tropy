@@ -1,0 +1,19 @@
+{
+  "name": "tropy-bez-barierov",
+  "version": "1.0.0",
+  "description": "«Тропы без барьеров» — инклюзивный сервис выбора и планирования пеших маршрутов по России",
+  "private": true,
+  "license": "MIT",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "LOG_REQUESTS=1 node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "test": "node --disable-warning=ExperimentalWarning --test --test-concurrency=1 \"tests/*.test.js\"",
+    "build:standalone": "node tools/build-standalone.mjs",
+    "build:tracks": "node tools/tracks/to-js.mjs",
+    "check": "node tools/check.mjs"
+  }
+}
