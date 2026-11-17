@@ -17,8 +17,7 @@
   App.pages.needLogin = function (ctx, opts) {
     var next = encodeURIComponent(App.here());
     return simplePage(opts.title || 'Нужно войти', opts.lead || 'Этот раздел доступен после входа: так ваши планы и списки сохранятся и будут доступны на любом устройстве.',
-      h`<div class="row"><a class="btn btn-primary" href="#/login?next=${next}">${App.icon('user')}Войти</a><a class="btn btn-secondary" href="#/register?next=${next}">Зарегистрироваться</a></div>
-        ${App.api.demo && App.api.demo.user ? ui.notice('info', 'Демо-доступ', 'Можно войти под демо-пользователем: demo@tropy.local, пароль Demo-2026.') : ''}`);
+      h`<div class="row"><a class="btn btn-primary" href="#/login?next=${next}">${App.icon('user')}Войти</a><a class="btn btn-secondary" href="#/register?next=${next}">Зарегистрироваться</a></div>`);
   };
   App.pages.forbidden = function () {
     return simplePage('Недостаточно прав', 'Этот раздел доступен только администраторам сайта.', h`<a class="btn btn-primary" href="#/">На главную</a>`);

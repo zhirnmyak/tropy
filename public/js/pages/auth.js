@@ -4,16 +4,6 @@
   var App = window.App, h = App.html, ui = App.ui, D = App.D, S = App.state;
 
   function nextPath(q) { var n = q.get('next') || ''; return /^\/[\w\-/?=&%,.]*$/.test(n) && n.indexOf('/login') !== 0 && n.indexOf('/register') !== 0 ? n : '/profile'; }
-  function demoNote() {
-    var d = App.api.demo || {};
-    if (!d.user && !d.admin) return '';
-    return h`<aside class="notice notice-info demo-note" aria-labelledby="demo-t">${App.icon('info', 'notice-i')}<div>
-      <p class="notice-title" id="demo-t">Демо-доступ для проверки</p>
-      ${d.user ? h`<p>Пользователь: <strong>demo@tropy.local</strong>, пароль <strong>Demo-2026</strong>.</p>` : ''}
-      ${d.admin ? h`<p>Администратор: <strong>admin@tropy.local</strong>, пароль <strong>Tropy-Admin-2026</strong>.</p>` : ''}
-      <div class="row">${d.user ? h`<button type="button" class="btn btn-secondary btn-small" data-action="demo-fill" data-who="demo">Подставить демо-пользователя</button>` : ''}${d.admin ? h`<button type="button" class="btn btn-ghost btn-small" data-action="demo-fill" data-who="admin">Подставить администратора</button>` : ''}</div>
-    </div></aside>`;
-  }
 
   App.route('/login', function (ctx) {
     if (S.user) return { title: 'Вход', html: h`<div class="container page page-narrow">${ui.pageHead({ title: 'Вы уже вошли', lead: 'Вы вошли как ' + S.user.name + '.' })}<div class="row"><a class="btn btn-primary" href="#/profile">Личный кабинет</a><button type="button" class="btn btn-secondary" data-action="logout">Выйти</button></div></div>` };
@@ -30,7 +20,6 @@
             <div class="form-actions"><button type="submit" class="btn btn-primary btn-block">Войти</button></div>
             <p>Нет аккаунта? <a href="#/register?next=${encodeURIComponent(next)}">Зарегистрируйтесь</a> — это бесплатно.</p>
           </form>
-          ${demoNote()}
         </div>
       </div>`
     };
@@ -70,14 +59,5 @@
     App.setMe(me);
     App.toast('Аккаунт создан. Добро пожаловать!', 'ok');
     App.go(form.getAttribute('data-next'));
-  });
-  App.actions({
-    'demo-fill': function (el) {
-      var admin = el.getAttribute('data-who') === 'admin';
-      document.getElementById('login-email').value = admin ? 'admin@tropy.local' : 'demo@tropy.local';
-      document.getElementById('login-password').value = admin ? 'Tropy-Admin-2026' : 'Demo-2026';
-      App.announce('Данные подставлены. Нажмите «Войти».');
-      App.$('form[data-form="login"] [type=submit]').focus();
-    }
   });
 })();

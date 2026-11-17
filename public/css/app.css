@@ -1076,8 +1076,6 @@ h1.kb-title { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem); }
 
 /* Вход и регистрация */
 .auth-grid { display: grid; gap: 1.25rem; }
-@media (min-width: 48em) { .auth-grid:has(.demo-note) { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: start; } }
-.demo-note { margin: 0; }
 
 /* Администрирование */
 .tabs ul { display: flex; flex-wrap: wrap; gap: .25rem; list-style: none; margin: 0 0 1.5rem; padding: 0; border-bottom: 2px solid var(--border); }
